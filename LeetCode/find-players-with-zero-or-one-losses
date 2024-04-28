@@ -1,0 +1,27 @@
+class Solution(object):
+    def findWinners(self, matches):
+        """
+        :type matches: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        winner = {}
+        loser = {}
+        for lis in matches:
+            if lis[0] not in winner:
+                winner[lis[0]] = 1
+            else:
+                winner[lis[0]] += 1
+            if lis[1] not in loser:
+                loser[lis[1]] = 1
+            else:
+                loser[lis[1]] += 1
+        
+        winnerLis = []
+        loserLis = []
+        for i in winner:
+            if i not in loser:
+                winnerLis.append(i)
+        for j in loser:
+            if loser[j] == 1:
+                loserLis.append(j)
+        return [sorted(winnerLis), sorted(loserLis)]
