@@ -1,0 +1,29 @@
+class Solution(object):
+    def pancakeSort(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        def next_max (arr, n):
+            maxm = -1
+            for i in arr:
+                if i > maxm and i < n:
+                    maxm = i
+            return maxm
+        
+        maxm = len(arr)
+        flip = len(arr)
+        loc = - 1
+        lis = []
+        while maxm != -1:
+            for i in range(len(arr)):
+                if arr[i] == maxm:
+                    loc = i
+                    break
+            arr = arr[:loc+1][::-1] + arr[loc+1:]
+            arr = arr[:flip][::-1] + arr[flip:]
+            maxm = next_max(arr, maxm)
+            lis.append(loc+1)
+            lis.append(flip)
+            flip -= 1
+        return lis
