@@ -1,0 +1,19 @@
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        firstAP = m - 1
+        secondAP = n - 1
+        placeHolder = len(nums1) - 1
+        while placeHolder >-1:
+            first = nums1[firstAP] if firstAP > -1 else float(-inf)
+            second = nums2[secondAP] if secondAP > -1 else float(-inf)
+            if first > second:
+                nums1[placeHolder] = first
+                firstAP -= 1
+                placeHolder -= 1
+            elif first <= second:
+                nums1[placeHolder] = second
+                placeHolder -= 1
+                secondAP -= 1
