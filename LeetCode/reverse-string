@@ -1,0 +1,14 @@
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        def reverser(arr, num):
+            if len(arr)//2 == num:
+                return
+            temp = arr[num]
+            arr[num] = arr[len(arr) - 1 - num]
+            arr[len(arr) - 1 - num] = temp
+            reverser(arr, num + 1)
+            return
+        reverser(s, 0)

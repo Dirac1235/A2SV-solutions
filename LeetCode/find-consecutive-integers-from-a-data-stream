@@ -1,0 +1,40 @@
+class DataStream:
+
+    def __init__(self, value: int, k: int):
+        self.k = k
+        self.value = value
+        self.qu = deque()
+        self.fcount = 0
+    def consec(self, num: int) -> bool:
+        self.qu.append(num)
+        leng = len(self.qu)
+
+        if num != self.value:
+            self.fcount += 1
+       
+        if leng < self.k:
+            return False
+        elif leng > self.k:
+            val = self.qu.popleft()
+            if val != self.value and self.fcount != 0:
+                self.fcount -= 1
+        elif leng == self.k:
+            if num != self.value:
+                return False
+            else:
+                if self.fcount == 0:
+                    return True
+                else:
+                    return False
+        if self.fcount > self.k:
+            self.fcount = self.k          
+       
+        if self.fcount == 0:
+            return True
+        else:
+            return False
+
+
+# Your DataStream object will be instantiated and called as such:
+# obj = DataStream(value, k)
+# param_1 = obj.consec(num)
